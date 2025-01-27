@@ -17,22 +17,18 @@ func PreRun(firstRun bool) error {
 	// Just to make sure messages like TZ change or public game spam arent on the way
 	ClearMessages()
 
-	if firstRun {
-		Stash(false)
-	}
-
 	UpdateQuestLog()
 
 	// Store items that need to be left unidentified
 	if HaveItemsToStashUnidentified() {
-		Stash(firstRun)
+		Stash(false)
 	}
 
 	// Identify - either via Cain or Tome
-	IdentifyAll(firstRun)
+	IdentifyAll(false)
 
 	// Stash before vendor
-	Stash(firstRun)
+	Stash(false)
 
 	// Refill pots, sell, buy etc
 	VendorRefill(false, true)
@@ -97,12 +93,12 @@ func InRunReturnTownRoutine() error {
 	ReviveMerc()
 	HireMerc()
 	Repair()
-	
-	if (ctx.CharacterCfg.Companion.Leader) {
+
+	if ctx.CharacterCfg.Companion.Leader {
 		UsePortalInTown()
 		utils.Sleep(500)
 		return OpenTPIfLeader()
 	}
-	
+
 	return UsePortalInTown()
 }
