@@ -79,8 +79,8 @@ func MoveTo(dest data.Position, options ...MoveOption) error {
 				idleStartTime = time.Now()
 			} else if time.Since(idleStartTime) > idleThreshold {
 				// Perform anti-idle action
-				ctx.Logger.Debug("Anti-idle triggered")
-				ctx.PathFinder.RandomMovement()
+				// ctx.Logger.Debug("Anti-idle triggered")
+				// ctx.PathFinder.RandomMovement()
 				idleStartTime = time.Time{} // Reset idle timer
 				continue
 			}

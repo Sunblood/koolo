@@ -373,7 +373,7 @@ func CubeRecipes() error {
 			continue
 		}
 
-		ctx.Logger.Debug("Cube recipe is enabled, processing", "recipe", recipe.Name)
+		// ctx.Logger.Debug("Cube recipe is enabled, processing", "recipe", recipe.Name)
 
 		continueProcessing := true
 		for continueProcessing {

@@ -80,7 +80,7 @@ func (d *Diablo) Run() error {
 		for _, sealID := range sealGroups[bossName] {
 			seal, found := d.ctx.Data.Objects.FindOne(sealID)
 			if !found {
-				return fmt.Errorf("seal not found: %d", sealID)
+				// return fmt.Errorf("seal not found: %d", sealID)
 			}
 
 			err := action.ClearThroughPath(seal.Position, 20, d.getMonsterFilter())
@@ -91,7 +91,7 @@ func (d *Diablo) Run() error {
 			// Handle the special case for DiabloSeal3
 			if sealID == object.DiabloSeal3 && seal.Position.X == 7773 && seal.Position.Y == 5155 {
 				if err = action.MoveToCoords(data.Position{X: 7768, Y: 5160}); err != nil {
-					return fmt.Errorf("failed to move to bugged seal position: %w", err)
+					// return fmt.Errorf("failed to move to bugged seal position: %w", err)
 				}
 			}
 
@@ -107,13 +107,13 @@ func (d *Diablo) Run() error {
 				seal, _ = d.ctx.Data.Objects.FindOne(sealID)
 				return !seal.Selectable
 			}); err != nil {
-				return fmt.Errorf("failed to interact with seal: %w", err)
+				// return fmt.Errorf("failed to interact with seal: %w", err)
 			}
 
 			// Infector spawns when first seal is enabled
 			if object.DiabloSeal1 == sealID {
 				if err = d.killSealElite(bossName); err != nil {
-					return err
+					// return err
 				}
 			}
 		}
@@ -123,7 +123,7 @@ func (d *Diablo) Run() error {
 			// Wait for the boss to spawn and kill it.
 			// Lord De Seis sometimes it's far, and we can not detect him, but we will kill him anyway heading to the next seal
 			if err := d.killSealElite(bossName); err != nil && bossName != "Lord De Seis" {
-				return err
+				// return err
 			}
 		}
 
